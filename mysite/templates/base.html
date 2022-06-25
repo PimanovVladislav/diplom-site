@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block tittle %} Hot New's {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'news/css/style.css'%}"></head>
+<body>
+<div class="all-body">
+    <div class='sidebar'>
+        <div class="name-site">BREAKING NEWS HERE AND NOW!!!</div>
+        <div class='sidebar-menu'>
+            <div class="container-child"><a href="/news">На главную</a></div>
+            <div class="container-child"><a href="#">Создать новость</a></div>
+            <div class="container-child"><a href="/news/about_us">О разработчике</a></div>
+        </div>
+    </div>
+    {% block hot_menu %}
+    <div class='hot-menu'>
+        {% for item in hot_news %}
+        <div class="container-hot-new">
+            <div class="title-hot-menu">
+                <a href="/news/readmore/{{item.pk}}">{{item.title}}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+    <div class='sitebody'>
+
+        <div class="contents-panel">
+            {% block content %}
+            {% endblock %}
+            </div>
+            <div class="right-panel">
+                {% block right_panel %}
+                <div class="sorted-by">сортировка:</div>
+                <div class="sorted-by-date"><a href="/news/daterank">по дате</a></div>
+                <div class="sorted-by-relenvanted"><a href="/news/recomended">на основе предпочтений</a></div>
+                <div class="search"><a href="/news/search">поиск...</a></div>
+                <div class="categories-list">
+                    <div class="category-name">
+                        <div class="category-name-link">Категории</div>
+                        {% for item in tags %}
+                        <div class="category-name-link"><a href="/news/category/{{item.pk}}">{{ item.name }}</a></div>
+                        {%endfor%}
+                    </div>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+        <div id="footer">
+            <p>Created by Пиманов Владислав Денисович 2022</p>
+        </div>
+    </div>
+</body>
+</html>
